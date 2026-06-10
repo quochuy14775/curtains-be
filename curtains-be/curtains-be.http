@@ -1,0 +1,6 @@
+@curtains_be_HostAddress = http://localhost:5245
+
+GET {{curtains_be_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
