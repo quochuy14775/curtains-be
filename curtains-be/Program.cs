@@ -1,10 +1,12 @@
 using System.Text;
+using System.Threading.RateLimiting;
 using curtains_be.Data;
 using curtains_be.Models;
 using curtains_be.Repository;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.OData;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OData.ModelBuilder;
@@ -23,6 +25,7 @@ builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 var odataBuilder = new ODataConventionModelBuilder();
 odataBuilder.EntitySet<Product>("Product");
 odataBuilder.EntitySet<Category>("Category");
+odataBuilder.EntitySet<Appointment>("Appointment");
 
 // Controllers + OData  
 builder.Services.AddControllers();
@@ -73,6 +76,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddAuthorization();
 
+// Rate limit cho endpoint public (form đặt lịch tư vấn) — 5 request/phút mỗi IP
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+    options.AddPolicy("PublicForm", context =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            context.Connection.RemoteIpAddress?.ToString() ?? "anonymous",
+            _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 5,
+                Window = TimeSpan.FromMinutes(1)
+            }));
+});
+
 // CSRF
 builder.Services.AddAntiforgery(options =>
 {
@@ -91,6 +108,7 @@ app.UseHttpsRedirection();
 app.UseCors("Frontend");
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseRateLimiter();
 app.MapControllers();
 
 app.Run();
