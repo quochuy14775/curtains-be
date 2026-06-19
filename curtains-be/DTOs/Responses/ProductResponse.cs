@@ -9,6 +9,7 @@ public class ProductResponse
     public string? Tag { get; set; }
     public string? ColorHex { get; set; }
     public string? ColorGroup { get; set; }
+    public string? ImageUrl { get; set; }
     public int CategoryId { get; set; }
     public string? CategoryTitle { get; set; }
     public bool IsActived { get; set; }

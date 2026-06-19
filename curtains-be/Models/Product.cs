@@ -8,6 +8,7 @@ public class Product : BaseEntity
     public string? Tag { get; set; }
     public string? ColorHex { get; set; }
     public string? ColorGroup { get; set; }
+    public string? ImageUrl { get; set; }
 
     public int CategoryId { get; set; }
     public Category Category { get; set; } = null!;

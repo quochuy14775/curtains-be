@@ -33,6 +33,7 @@ public static class ProductService
                 Tag = p.Tag,
                 ColorHex = p.ColorHex,
                 ColorGroup = p.ColorGroup,
+                ImageUrl = p.ImageUrl,
                 CategoryId = p.CategoryId,
                 CategoryTitle = p.Category?.Title,
                 IsActived = p.IsActived
@@ -62,6 +63,7 @@ public static class ProductService
                 Tag = p.Tag,
                 ColorHex = p.ColorHex,
                 ColorGroup = p.ColorGroup,
+                ImageUrl = p.ImageUrl,
                 CategoryId = p.CategoryId,
                 CategoryTitle = p.Category?.Title,
                 IsActived = p.IsActived
@@ -81,6 +83,9 @@ public static class ProductService
                 Material = p.Material,
                 Price = p.Price,
                 Tag = p.Tag,
+                ColorHex = p.ColorHex,
+                ColorGroup = p.ColorGroup,
+                ImageUrl = p.ImageUrl,
                 CategoryId = p.CategoryId,
                 CategoryTitle = p.Category!.Title,
                 IsActived = p.IsActived
@@ -98,6 +103,7 @@ public static class ProductService
             Tag = req.Tag,
             ColorHex = req.ColorHex,
             ColorGroup = req.ColorGroup,
+            ImageUrl = req.ImageUrl,
             CategoryId = req.CategoryId,
             CreatedBy = createdBy
         };
@@ -119,6 +125,7 @@ public static class ProductService
         product.Tag = req.Tag;
         product.ColorHex = req.ColorHex;
         product.ColorGroup = req.ColorGroup;
+        product.ImageUrl = req.ImageUrl;
         product.CategoryId = req.CategoryId;
         product.UpdatedAt = DateTime.UtcNow;
         product.UpdatedBy = updatedBy;

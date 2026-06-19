@@ -21,14 +21,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
 
-// OData EDM
-var odataBuilder = new ODataConventionModelBuilder();
-odataBuilder.EntitySet<Product>("Product");
-odataBuilder.EntitySet<Category>("Category");
-odataBuilder.EntitySet<Appointment>("Appointment");
-
 // Controllers + OData  
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddOData(options => options.Select().Filter().OrderBy().Count().SetMaxTop(100));
 
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
@@ -103,6 +98,10 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+// Auto-migrate on startup
+using (var scope = app.Services.CreateScope())
+    scope.ServiceProvider.GetRequiredService<AppDbContext>().Database.Migrate();
 
 app.UseHttpsRedirection();
 app.UseCors("Frontend");
