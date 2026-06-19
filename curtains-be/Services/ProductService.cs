@@ -33,7 +33,10 @@ public static class ProductService
                 Tag = p.Tag,
                 ColorHex = p.ColorHex,
                 ColorGroup = p.ColorGroup,
-                ImageUrl = p.ImageUrl,
+                ImageFront  = p.ImageFront,
+                ImageLeft   = p.ImageLeft,
+                ImageRight  = p.ImageRight,
+                ImageDetail = p.ImageDetail,
                 CategoryId = p.CategoryId,
                 CategoryTitle = p.Category?.Title,
                 IsActived = p.IsActived
@@ -63,7 +66,10 @@ public static class ProductService
                 Tag = p.Tag,
                 ColorHex = p.ColorHex,
                 ColorGroup = p.ColorGroup,
-                ImageUrl = p.ImageUrl,
+                ImageFront  = p.ImageFront,
+                ImageLeft   = p.ImageLeft,
+                ImageRight  = p.ImageRight,
+                ImageDetail = p.ImageDetail,
                 CategoryId = p.CategoryId,
                 CategoryTitle = p.Category?.Title,
                 IsActived = p.IsActived
@@ -85,7 +91,10 @@ public static class ProductService
                 Tag = p.Tag,
                 ColorHex = p.ColorHex,
                 ColorGroup = p.ColorGroup,
-                ImageUrl = p.ImageUrl,
+                ImageFront  = p.ImageFront,
+                ImageLeft   = p.ImageLeft,
+                ImageRight  = p.ImageRight,
+                ImageDetail = p.ImageDetail,
                 CategoryId = p.CategoryId,
                 CategoryTitle = p.Category!.Title,
                 IsActived = p.IsActived
@@ -103,8 +112,11 @@ public static class ProductService
             Tag = req.Tag,
             ColorHex = req.ColorHex,
             ColorGroup = req.ColorGroup,
-            ImageUrl = req.ImageUrl,
-            CategoryId = req.CategoryId,
+            ImageFront  = req.ImageFront,
+            ImageLeft   = req.ImageLeft,
+            ImageRight  = req.ImageRight,
+            ImageDetail = req.ImageDetail,
+            CategoryId  = req.CategoryId,
             CreatedBy = createdBy
         };
 
@@ -125,7 +137,10 @@ public static class ProductService
         product.Tag = req.Tag;
         product.ColorHex = req.ColorHex;
         product.ColorGroup = req.ColorGroup;
-        product.ImageUrl = req.ImageUrl;
+        product.ImageFront  = req.ImageFront;
+        product.ImageLeft   = req.ImageLeft;
+        product.ImageRight  = req.ImageRight;
+        product.ImageDetail = req.ImageDetail;
         product.CategoryId = req.CategoryId;
         product.UpdatedAt = DateTime.UtcNow;
         product.UpdatedBy = updatedBy;
