@@ -28,7 +28,12 @@ public static class CategoryService
                 Id = c.Id,
                 Title = c.Title,
                 Subtitle = c.Subtitle,
-                ProductCount = c.Products?.Count(p => !p.IsDeleted && p.IsActived) ?? 0
+                ProductCount = c.Products?.Count(p => !p.IsDeleted && p.IsActived) ?? 0,
+                ImageUrl = c.ImageUrl,
+                CoverImage = c.Products!
+                    .Where(p => !p.IsDeleted && p.IsActived && p.ImageDetail != null)
+                    .Select(p => p.ImageDetail)
+                    .FirstOrDefault()
             })
         };
     }
@@ -54,6 +59,7 @@ public static class CategoryService
         {
             Title = req.Title,
             Subtitle = req.Subtitle,
+            ImageUrl = req.ImageUrl,
             CreatedBy = createdBy
         };
 
@@ -70,6 +76,7 @@ public static class CategoryService
 
         category.Title = req.Title;
         category.Subtitle = req.Subtitle;
+        category.ImageUrl = req.ImageUrl;
         category.UpdatedAt = DateTime.UtcNow;
         category.UpdatedBy = updatedBy;
 

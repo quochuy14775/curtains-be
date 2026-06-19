@@ -4,4 +4,5 @@ public class CategoryRequest
 {
     public string Title { get; set; } = string.Empty;
     public string? Subtitle { get; set; }
+    public string? ImageUrl { get; set; }
 }
